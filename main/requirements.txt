@@ -6,3 +6,6 @@ langchain-google-genai
 google-generativeai
 langchain-community
 gradio
+pandas
+datasets
+json
