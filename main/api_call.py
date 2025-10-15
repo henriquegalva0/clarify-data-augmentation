@@ -1,20 +1,16 @@
 from langchain.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.output_parsers import StrOutputParser
-from data_config import fewshot_dataset
 import pandas as pd
 from random import randint
 import json
 
-naming_samples_index=""
+from load_data import parsed_dataset
 
-def exemplo_alvo():
-    global naming_samples_index 
-
+def exemplo_alvo(fewshot_dataset): 
     max_length=fewshot_dataset["evasion_label"].count()
     num=randint(0,max_length-1)
     row_data = fewshot_dataset.iloc[num]
-    naming_samples_index=naming_samples_index+str(num)
     
     return str("{{" + f'"interview_question": "{row_data["interview_question"]}", "interview_answer": "{row_data["interview_answer"]}", "evasion_label": "{row_data["evasion_label"]}"' + "}}")
 
@@ -23,24 +19,32 @@ with open("clarify-data-augmentation/main/prompt.txt","r",encoding="utf-8") as p
 
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash",
-    temperature=0.7,
+    temperature=0.45,
     google_api_key="CHANGEME"
 )
 
 template_text = (template_prompt)
 prompt = PromptTemplate(
-    input_variables=["exemplo1", "exemplo2", "exemplo3"],
+    input_variables=["exemplo1", "exemplo2", "exemplo3", "exemplo4", "exemplo5"],
     template=template_text
 )
 
 qa_chain = prompt | llm | StrOutputParser()
 
-resposta = qa_chain.invoke({
-    "exemplo1": exemplo_alvo(),
-    "exemplo2": exemplo_alvo(),
-    "exemplo3": exemplo_alvo()
-})
-output=resposta.replace("```","").replace("json","")
-dict_data = json.loads(output)
-new_data = pd.DataFrame(dict_data)
-new_data.to_csv(f'newdata{naming_samples_index}.csv', index=False, encoding='utf-8')
+def generate_data(target_label):
+    
+    fewshot_dataset = parsed_dataset[parsed_dataset["evasion_label"] == target_label]
+    fewshot_dataset.reset_index(drop=True, inplace=True)
+    
+    resposta = qa_chain.invoke({
+        "exemplo1": exemplo_alvo(fewshot_dataset),
+        "exemplo2": exemplo_alvo(fewshot_dataset),    
+        "exemplo3": exemplo_alvo(fewshot_dataset),
+        "exemplo4": exemplo_alvo(fewshot_dataset),
+        "exemplo5": exemplo_alvo(fewshot_dataset)
+    })
+    output=resposta.replace("```","").replace("json","")
+
+    dict_data = json.loads(output)
+    
+    return pd.DataFrame(dict_data)
