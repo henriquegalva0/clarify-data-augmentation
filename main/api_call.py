@@ -7,7 +7,7 @@ import json
 
 from load_data import parsed_dataset
 
-def exemplo_alvo(fewshot_dataset): 
+def target_sample(fewshot_dataset): 
     max_length=fewshot_dataset["evasion_label"].count()
     num=randint(0,max_length-1)
     row_data = fewshot_dataset.iloc[num]
@@ -37,11 +37,11 @@ def generate_data(target_label):
     fewshot_dataset.reset_index(drop=True, inplace=True)
     
     resposta = qa_chain.invoke({
-        "sample1": exemplo_alvo(fewshot_dataset),
-        "sample2": exemplo_alvo(fewshot_dataset),    
-        "sample3": exemplo_alvo(fewshot_dataset),
-        "sample4": exemplo_alvo(fewshot_dataset),
-        "sample5": exemplo_alvo(fewshot_dataset)
+        "sample1": target_sample(fewshot_dataset),
+        "sample2": target_sample(fewshot_dataset),    
+        "sample3": target_sample(fewshot_dataset),
+        "sample4": target_sample(fewshot_dataset),
+        "sample5": target_sample(fewshot_dataset)
     })
     output=resposta.replace("```","").replace("json","")
 
