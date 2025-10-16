@@ -50,12 +50,12 @@ Output only valid JSON.
 
 Few-shot examples:
 
-{exemplo1}
+{sample1}
 
-{exemplo2}
+{sample2}
 
-{exemplo3}
+{sample3}
 
-{exemplo4}
+{sample4}
 
-{exemplo5}
+{sample5}
