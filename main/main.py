@@ -13,12 +13,14 @@ for label,value in (augmented_dataset["evasion_label"].value_counts()).items():
             
             print(augmented_dataset["evasion_label"].value_counts())
 
-#Explicit               1052
-#Dodging                 706
-#Implicit                488
-#General                 386
-#Deflection              381
-#Declining to answer     145
-#Claims ignorance        119
-#Clarification            92
-#Partial/half-answer      79
+# original dataset value_counts:
+            
+# Explicit               1052
+# Dodging                 706
+# Implicit                488
+# General                 386
+# Deflection              381
+# Declining to answer     145
+# Claims ignorance        119
+# Clarification            92
+# Partial/half-answer      79
