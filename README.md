@@ -32,4 +32,5 @@ data_size_target=int(1052) <--- Target size by label
 
 ## Notes
 * More info about the SemEval's Task can be obtained on [CLARITY-SemEval-2026](https://konstantinosftw.github.io/CLARITY-SemEval-2026/).
-* [augmented_dataset.csv](augmented_dataset.csv) is the augmented version of the original dataset [QEvasion](https://huggingface.co/datasets/ailsntua/QEvasion).
+* The file [augmented_dataset.csv](augmented_dataset.csv) is the augmented version of the original dataset [QEvasion](https://huggingface.co/datasets/ailsntua/QEvasion).
+* To edit the prompt used to generate [augmented_dataset.csv](augmented_dataset.csv), just modify the file [prompt.txt](main/prompt.txt).
