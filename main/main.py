@@ -2,10 +2,11 @@ import pandas as pd
 from api_call import generate_data
 
 augmented_dataset=pd.read_csv("augmented_dataset.csv")
+data_size_target=int(1052)
 
 for label,value in (augmented_dataset["evasion_label"].value_counts()).items():
-    if int(value)<1052:
-        while len(augmented_dataset[augmented_dataset["evasion_label"]==label]) < 1052:
+    if int(value)<data_size_target:
+        while len(augmented_dataset[augmented_dataset["evasion_label"]==label]) < data_size_target:
             new_data=generate_data(label)
             augmented_dataset = pd.concat([augmented_dataset, new_data], ignore_index=True)
             new_data.to_csv("augmented_dataset.csv", mode='a', header=False, index=False)
