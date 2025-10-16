@@ -25,7 +25,7 @@ Be careful! If you ran the code once and already created the file [augmented_dat
 ```
 parsed_dataset.to_csv("augmented_dataset.csv",index=False)
 ```
-If you want to generate more than 1052 data per label, consider changing the target size by label threshold number:
+If you want to generate more than 1052 data per label, consider changing the target size threshold number in the following line from [main.py](main/main.py):
 ```
 data_size_target=int(1052) <--- Target size by label
 ```
