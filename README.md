@@ -18,13 +18,18 @@ llm = ChatGoogleGenerativeAI(
     google_api_key="CHANGEME" <--- API KEY
 )
 ```
-Run the code in [main.py](main/main.py) and you are ready to augmentate the dataset.
+Run the code in [main.py](main/main.py) and you're ready to augmentate the dataset!
 
-## Disclaimer
+## Disclaimers
 Be careful! If you ran the code once and already created the file [augmented_dataset.csv](augmented_dataset.csv), **remove** the following line inside [load_data.py](main/load_data.py):
 ```
 parsed_dataset.to_csv("augmented_dataset.csv",index=False)
 ```
+If you want to generate more than 1052 data per label, consider changing the target size by label threshold number:
+```
+data_size_target=int(1052) <--- Target size by label
+```
+
 ## Notes
 * More info about the SemEval's Task can be obtained on [CLARITY-SemEval-2026](https://konstantinosftw.github.io/CLARITY-SemEval-2026/).
 * [augmented_dataset.csv](augmented_dataset.csv) is the augmented version of the original dataset [QEvasion](https://huggingface.co/datasets/ailsntua/QEvasion).
