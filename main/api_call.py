@@ -25,7 +25,7 @@ llm = ChatGoogleGenerativeAI(
 
 template_text = (template_prompt)
 prompt = PromptTemplate(
-    input_variables=["exemplo1", "exemplo2", "exemplo3", "exemplo4", "exemplo5"],
+    input_variables=["sample1", "sample2", "sample3", "sample4", "sample5"],
     template=template_text
 )
 
@@ -37,11 +37,11 @@ def generate_data(target_label):
     fewshot_dataset.reset_index(drop=True, inplace=True)
     
     resposta = qa_chain.invoke({
-        "exemplo1": exemplo_alvo(fewshot_dataset),
-        "exemplo2": exemplo_alvo(fewshot_dataset),    
-        "exemplo3": exemplo_alvo(fewshot_dataset),
-        "exemplo4": exemplo_alvo(fewshot_dataset),
-        "exemplo5": exemplo_alvo(fewshot_dataset)
+        "sample1": exemplo_alvo(fewshot_dataset),
+        "sample2": exemplo_alvo(fewshot_dataset),    
+        "sample3": exemplo_alvo(fewshot_dataset),
+        "sample4": exemplo_alvo(fewshot_dataset),
+        "sample5": exemplo_alvo(fewshot_dataset)
     })
     output=resposta.replace("```","").replace("json","")
 
