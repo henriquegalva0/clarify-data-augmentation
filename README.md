@@ -18,14 +18,14 @@ llm = ChatGoogleGenerativeAI(
     google_api_key="CHANGEME" <--- API KEY
 )
 ```
-Run the code in [main.py](main/main.py) and you're ready to augmentate the dataset!
+Run the script [main.py](main/main.py) and you're ready to augmentate the dataset!
 
 ## Disclaimers
-Be careful! If you ran the code once and already created the file [augmented_dataset.csv](augmented_dataset.csv), **remove** the following line inside [load_data.py](main/load_data.py):
+Be careful! If you are trying to run the code for the second time and have already created/updated the file [augmented_dataset.csv](augmented_dataset.csv) with new data, **remove** the following line inside [load_data.py](main/load_data.py) or else you're losing the data you have just created:
 ```
 parsed_dataset.to_csv("augmented_dataset.csv",index=False)
 ```
-If you want to generate more than 1052 data per label, consider changing the target size threshold number in the following line from [main.py](main/main.py):
+Also, if you want to generate more than 1052 data per label, consider changing the target size threshold number in the following line from [main.py](main/main.py):
 ```
 data_size_target=int(1052) <--- Target size by label
 ```
