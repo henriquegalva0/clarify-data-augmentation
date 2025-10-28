@@ -27,7 +27,7 @@ Be careful! If you're trying to run the code for the second time and have alread
 if os.path.exists("clarify-data-augmentation/augmented_dataset.csv"):
     print("Augmented dataset already exists. Loading from 'augmented_dataset.csv'.")
 else:
-    parsed_dataset.to_csv("augmented_dataset.csv",index=False)    <--- New augmentation from the scratch
+    parsed_dataset.to_csv("augmented_dataset.csv",index=False)   <--- New augmentation from the scratch
 ```
 Also, if you want to generate more than 1052 data per label, consider changing the target size threshold number in the following line from [main.py](main/main.py):
 ```
@@ -36,4 +36,4 @@ data_size_target=int(1052)    <--- Target size by label
 
 ## Notes
 * More info about the SemEval's Task can be obtained on [CLARITY-SemEval-2026](https://konstantinosftw.github.io/CLARITY-SemEval-2026/).
-* To edit the prompts used, just modify the *.txt* files on [prompts](main/prompts/). Each file corresponds to each class.
+* To edit the prompts used, just modify the *.txt* files on [prompts](prompts/). Each file corresponds to each class.
