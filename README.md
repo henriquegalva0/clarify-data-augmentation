@@ -10,27 +10,30 @@ python3 -m venv .venv
 .venv/Scripts/Activate.ps1
 pip install -r requirements.txt
 ```
-Type your own google api key at [api_call.py](main/api_call.py) by changing the content of _google_api_key_:
+Type your own google API keys at [api_call.py](main/api_call.py) by removing, adding or changing keys on _api_keys_:
 ```
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash",
-    temperature=0.7,
-    google_api_key="CHANGEME" <--- API KEY
-)
+google_target_api_key=0
+api_keys=[
+    "CHANGEME1",     <--- API KEY
+    "CHANGEME2",     <--- API KEY
+    "CHANGEME3"      <--- API KEY
+    ]
 ```
 Run the script [main.py](main/main.py) and you're ready to augmentate the dataset!
 
 ## Disclaimers
-Be careful! If you are trying to run the code for the second time and have already created/updated the file [augmented_dataset.csv](augmented_dataset.csv) with new data, **remove** the following line inside [load_data.py](main/load_data.py) or else you're losing the data you have just created:
+Be careful! If you're trying to run the code for the second time and have already created/updated _augmented_dataset.csv_ with new data, **do not edit the name of this file** or else when running the script, the progress made **will not be considered**.
 ```
-parsed_dataset.to_csv("augmented_dataset.csv",index=False)
+if os.path.exists("clarify-data-augmentation/augmented_dataset.csv"):
+    print("Augmented dataset already exists. Loading from 'augmented_dataset.csv'.")
+else:
+    parsed_dataset.to_csv("augmented_dataset.csv",index=False)    <--- New augmentation from the scratch
 ```
 Also, if you want to generate more than 1052 data per label, consider changing the target size threshold number in the following line from [main.py](main/main.py):
 ```
-data_size_target=int(1052) <--- Target size by label
+data_size_target=int(1052)    <--- Target size by label
 ```
 
 ## Notes
 * More info about the SemEval's Task can be obtained on [CLARITY-SemEval-2026](https://konstantinosftw.github.io/CLARITY-SemEval-2026/).
-* The file [augmented_dataset.csv](augmented_dataset.csv) is the augmented version of the original dataset [QEvasion](https://huggingface.co/datasets/ailsntua/QEvasion).
-* To edit the prompt used to generate [augmented_dataset.csv](augmented_dataset.csv), just modify the file [prompt.txt](main/prompt.txt).
+* To edit the prompts used, just modify the *.txt* files on [prompts](main/prompts/). Each file corresponds to each class.
