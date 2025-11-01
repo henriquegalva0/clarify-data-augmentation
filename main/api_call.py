@@ -24,6 +24,8 @@ def target_sample(fewshot_dataset):
 
 def generate_data(target_label):
 
+    global google_target_api_key
+    
     filename = target_label.lower().replace(' ', '').replace('/', '') + ".txt"
     path = f"clarify-data-augmentation/prompts/{filename}"
 
