@@ -1,40 +1,38 @@
+# Profile:
 Act as an expert in data augmentation and political discourse analysis.
 Your task is to generate synthetic interview data for a SemEval 2026 task on clarity and evasiveness in political speech.
 
-Context:
+# Context:
 
 You will receive few-shot examples in this format:
 {{"interview_question" : “text”, "interview_answer" : “text”, "evasion_label" : "class"}}
 
 Each example represents one data instance.
-You must understand the input structure and meaning before generating new outputs.
+You must understand the input structure and meaning *before generating* new outputs.
 
-Your goal:
+## Goal:
 
 Create synthetic variations that:
 
-Keep the same classification label as the original.
+* Keep the original evasion technique "CLAIMING IGNORANCE" seen in the few-shot examples.
+* The idea of "CLAIMING IGNORANCE" is showing on the answer that the president doesn't know or doesn't remember info about the answer required. 
+* Preserve the core political intent and meaning, but rephrase creatively without losing the evasion technique used.
+* Introduce diverse speaking styles (formal, colloquial, rhetorical, defensive, assertive, vague, etc.).
+* Maintain an answer length 15% above or less 900 characters.
+* Ensure logical consistency between interviewer and president.
+* Develop a mostly negative/neutral sentiment returning the output.
+* On 30% of the generated samples try adding 3 to 5 sentence usual fillers and hedges.
+* Avoid factual errors, hallucinations or *unrelated topics* while building the questions and answers.
 
-Preserve the core political intent and meaning, but rephrase creatively.
-
-Introduce diverse speaking styles (formal, colloquial, rhetorical, defensive, assertive, vague, etc.).
-
-Maintain a similar length (±15%) compared to the original.
-
-Ensure logical consistency between interviewer and president.
-
-Avoid factual errors, hallucinations, or unrelated topics.
-
-Instructions:
+# Instructions:
 
 Carefully read and understand each example before generating output.
 
-For each example, produce 3 rewritten variations following the same classification semantic.
+For each example, produce 10 to 12 rewritten variations following the same classification semantic and related topics.
 
-Each variation must follow this JSON format:
+Each variation *MUST FOLLOW* this JSON format:
 
-{{"interview_question": "new question text", "interview_answer": "new answer text", "evasion_label": "same label as input"}}
-
+{{"interview_question": "new question text", "interview_answer": "new answer text", "evasion_label": "Claims ignorance"}}
 
 Output all generated variations as a JSON array, for example:
 
@@ -44,11 +42,15 @@ Output all generated variations as a JSON array, for example:
   {{"interview_question": "...", "interview_answer": "...", "evasion_label": "..."}}
 ]
 
-Do not include any other president besides Donald J. Trump, Barack Obama, George W. Bush, Joseph R. Biden.
-Do not include explanations or any text outside the JSON.
-Output only valid JSON.
+You must focus especially on trying to mimic the "claiming ignorance" semantic behind the text, not mainly on the topic.
 
-Few-shot examples:
+# Restrictions:
+
+* Do not include any other president besides Donald J. Trump, Barack Obama, George W. Bush, Joseph R. Biden.
+* Do not include explanations or any text outside the JSON.
+* Output only valid JSON format.
+
+## Few-shot examples:
 
 {sample1}
 
