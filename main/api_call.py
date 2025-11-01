@@ -25,7 +25,7 @@ def target_sample(fewshot_dataset):
 def generate_data(target_label):
 
     filename = target_label.lower().replace(' ', '').replace('/', '') + ".txt"
-    path = f"clarify-data-augmentation/main/prompts/{filename}"
+    path = f"clarify-data-augmentation/prompts/{filename}"
 
     with open(path, "r", encoding="utf-8") as prompt_txt:
         template_prompt = prompt_txt.read()
